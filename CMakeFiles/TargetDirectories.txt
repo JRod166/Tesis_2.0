@@ -1,0 +1,4 @@
+C:/Users/u1/Documents/tesis/CMakeFiles/ALL_BUILD.dir
+C:/Users/u1/Documents/tesis/CMakeFiles/ZERO_CHECK.dir
+C:/Users/u1/Documents/tesis/src/Calibration_Ring/CMakeFiles/Calibration_Ring.dir
+C:/Users/u1/Documents/tesis/src/Calibration_Ring/CMakeFiles/ALL_BUILD.dir

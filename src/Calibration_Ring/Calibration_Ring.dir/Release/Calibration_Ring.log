@@ -1,0 +1,189 @@
+﻿  main_calibration_ring.cpp
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\calibration_utils.h(16,32): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\ring/projective_invariants.h(18,29): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\ring/projective_invariants.h(19,26): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\ring/projective_invariants.h(26,18): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\ring/projective_invariants.h(93,1): warning C4244: '+=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(249,18): warning C4244: 'inicializando': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(270,17): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(271,17): warning C4244: 'inicializando': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(272,13): warning C4244: 'inicializando': conversión de '_Tp' a 'int'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(273,13): warning C4244: 'inicializando': conversión de '_Tp' a 'int'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(275,21): warning C4244: 'inicializando': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(276,70): warning C4244: 'argumento': conversión de 'double' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(276,41): warning C4244: 'argumento': conversión de 'double' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(291,31): warning C4244: 'argumento': conversión de 'int' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(291,26): warning C4244: 'argumento': conversión de 'int' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(299,38): warning C4244: 'argumento': conversión de 'int' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(299,33): warning C4244: 'argumento': conversión de 'int' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(317,41): warning C4244: 'argumento': conversión de 'int' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(317,36): warning C4244: 'argumento': conversión de 'int' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(365,74): warning C4244: 'argumento': conversión de 'double' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(371,39): warning C4244: 'argumento': conversión de 'double' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(371,73): warning C4244: 'argumento': conversión de 'double' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(375,54): warning C4244: 'argumento': conversión de 'double' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=int
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(415,1): warning C4267: '=': conversión de 'size_t' a 'int'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(523,30): warning C4244: 'argumento': conversión de 'double' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(523,20): warning C4244: 'argumento': conversión de 'double' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(624,83): warning C4244: 'argumento': conversión de 'double' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(623,102): warning C4244: 'argumento': conversión de 'double' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(828,43): warning C4244: '=': conversión de 'double' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h(829,43): warning C4244: '=': conversión de 'double' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\ring\pattern_point.h(29,20): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\ring/pattern_search.h(127,37): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\ring/pattern_search.h(128,37): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\ring/pattern_search.h(196,55): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\ring/pattern_search.h(214,89): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\ring/pattern_search.h(224,77): warning C4244: 'argumento': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\ring/pattern_search.h(233,37): warning C4267: 'return': conversión de 'size_t' a 'int'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\ring/pattern_search.h(152,53): warning C4101: 'e': variable local sin referencia
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\ring/pattern_search.h(165,45): warning C4101: 'e': variable local sin referencia
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\ring/pattern_search.h(262,32): warning C4244: '=': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\ring/pattern_search.h(271,20): warning C4244: '=': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\ring/pattern_search.h(273,14): warning C4244: '=': conversión de 'float' a 'int'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\ring/pattern_search.h(300,44): warning C4267: 'inicializando': conversión de 'size_t' a 'int'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\ring/pattern_search.h(311,40): warning C4267: '=': conversión de 'size_t' a 'int'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\ring/pattern_search.h(302,11): warning C4101: 'distance': variable local sin referencia
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\ring/pattern_search.h(304,9): warning C4101: 'replace_point': variable local sin referencia
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\ring/pattern_search.h(412,26): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\ring/pattern_search.h(438,26): warning C4244: 'return': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration_ring.h(31,65): warning C4244: 'argumento': conversión de 'double' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration_ring.h(30,65): warning C4244: 'argumento': conversión de 'double' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration_ring.h(47,23): warning C4244: 'inicializando': conversión de 'int' a 'float'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration_ring.h(48,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration_ring.h(49,16): warning C4244: 'inicializando': conversión de 'double' a 'float'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration_ring.h(85,49): warning C4244: 'argumento': conversión de 'double' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration_ring.h(84,63): warning C4244: 'argumento': conversión de 'double' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration_ring.h(101,14): warning C4244: 'inicializando': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration_ring.h(102,14): warning C4244: 'inicializando': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration_ring.h(103,10): warning C4244: 'inicializando': conversión de '_Tp' a 'int'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration_ring.h(104,10): warning C4244: 'inicializando': conversión de '_Tp' a 'int'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration_ring.h(106,18): warning C4244: 'inicializando': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration_ring.h(107,70): warning C4244: 'argumento': conversión de 'double' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration_ring.h(107,39): warning C4244: 'argumento': conversión de 'double' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration_ring.h(109,28): warning C4244: 'argumento': conversión de 'int' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration_ring.h(109,23): warning C4244: 'argumento': conversión de 'int' a '_Tp'; posible pérdida de datos
+          with
+          [
+              _Tp=float
+          ]
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\main_calibration_ring.cpp(33,18): warning C4244: 'inicializando': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\main_calibration_ring.cpp(34,18): warning C4244: 'inicializando': conversión de 'double' a 'int'; posible pérdida de datos
+C:\Users\u1\Documents\tesis\src\Calibration_Ring\main_calibration_ring.cpp(118,29): warning C4305: 'inicializando': truncamiento de 'double' a 'float'
+  Calibration_Ring.vcxproj -> C:\Users\u1\Documents\tesis\bin\Release\Calibration_Ring.exe
