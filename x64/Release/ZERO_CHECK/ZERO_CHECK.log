@@ -1,3 +1,37 @@
-﻿C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets(39,5): warning MSB4211: La propiedad "IntermediateOutputPath" se va a establecer en un valor por primera vez, pero ya se utilizó en "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets (38,5)".
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.BuildSteps.Targets(29,5): warning MSB4211: La propiedad "DebugType" se va a establecer en un valor por primera vez, pero ya se utilizó en "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.BuildSteps.Targets (28,5)".
-C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Current\Bin\Microsoft.Common.CurrentVersion.targets(370,5): warning MSB4211: La propiedad "CleanFile" se va a establecer en un valor por primera vez, pero ya se utilizó en "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\MSBuild\Microsoft\VC\v160\Microsoft.CppCommon.targets (38,5)".
+﻿  Checking Build System
+  CMake is re-running because generate.stamp.list is missing.
+  -- Building for: Visual Studio 16 2019
+  
+  NOT NEED CONFIGURING PATH FOR WINDOWS
+  
+  Current directory is: C:/Users/pokel/Documents/Tesis docs/Tesis_2.0
+  
+  Dependency directory is: 
+  
+  Build mode is: Release
+  -- Selecting Windows SDK version 10.0.19041.0 to target Windows 10.0.19043.
+  -- The C compiler identification is MSVC 19.29.30037.0
+  -- The CXX compiler identification is MSVC 19.29.30037.0
+  -- Detecting C compiler ABI info
+  -- Detecting C compiler ABI info - done
+  -- Check for working C compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Professional/VC/Tools/MSVC/14.29.30037/bin/Hostx64/x64/cl.exe - skipped
+  -- Detecting C compile features
+  -- Detecting C compile features - done
+  -- Detecting CXX compiler ABI info
+  -- Detecting CXX compiler ABI info - done
+  -- Check for working CXX compiler: C:/Program Files (x86)/Microsoft Visual Studio/2019/Professional/VC/Tools/MSVC/14.29.30037/bin/Hostx64/x64/cl.exe - skipped
+  -- Detecting CXX compile features
+  -- Detecting CXX compile features - done
+  CONFIGURING FOR WINDOWS
+  Configuring main application: Calibration_Ring
+  RUNTIME Output: C:/Users/pokel/Documents/Tesis docs/Tesis_2.0/bin
+  EXECUTABLE Output: C:/Users/pokel/Documents/Tesis docs/Tesis_2.0/bin
+  -- OpenCV ARCH: x64
+  -- OpenCV RUNTIME: vc15
+  -- OpenCV STATIC: OFF
+  -- Found OpenCV: D:/opencv/build (found version "4.4.0") found components: core imgproc calib3d highgui 
+  -- Found OpenCV 4.4.0 in D:/opencv/build/x64/vc15/lib
+  -- You might need to add D:\opencv\build\x64\vc15\bin to your PATH to be able to run your applications.
+  -- Configuring done
+  -- Generating done
+  -- Build files have been written to: C:/Users/pokel/Documents/Tesis docs/Tesis_2.0

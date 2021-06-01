@@ -9,8 +9,8 @@
 #include "opencv2/calib3d.hpp"
 #include "calibration_utils.h"
 #include "ring/projective_invariants.h"
-//#include <cminpack.h>
 
+#include <cminpack.h>
 
 #include <fstream>
 
@@ -33,11 +33,17 @@ using namespace std;
 #define real __cminpack_real__
 
 
-/*typedef struct {
+typedef struct {
 	int m;
 	real* y;
+	int frames;
+	int points;
+	vector<vector<Point3f>> calibration_obj_points;
+	vector<vector<Point2f>> set_points;
+	vector<Mat> tvecs;
+	vector<Mat> rvecs;
 } fcndata_t;
-int fcn(void* p, int m, int n, const real* x, real* fvec, int iflag);*/
+int fcn(void* p, int m, int n, const real* x, real* fvec, int iflag);
 class CameraCalibration {
 public:
 	vector<vector<Point2f>> set_points;
@@ -691,10 +697,24 @@ double CameraCalibration::calibrate_camera() {
 	                             camera_matrix,
 	                             dist_coeffs,
 	                             rvecs,
-	                             rvecs,CALIB_ZERO_TANGENT_DIST | 
+	                             tvecs,CALIB_ZERO_TANGENT_DIST | 
 																 CALIB_FIX_K1 /*| CALIB_FIX_K2 | CALIB_FIX_K3 |
 																 CALIB_FIX_K4 | CALIB_FIX_K5 | CALIB_FIX_K6 |
 																 CALIB_FIX_S1_S2_S3_S4 | CALIB_FIX_TAUX_TAUY*/);
+
+
+	const double* pos_i = camera_matrix.ptr<double>(0);
+	const double* pos_j = camera_matrix.ptr<double>(1);
+	results << pos_i[0] << ","; //Fx
+	results.flush();
+	results << pos_j[1] << ","; //Fy
+	results.flush();
+	results << pos_i[2] << ","; //Uo
+	results.flush();
+	results << pos_j[2] << ","; //V0
+	results.flush();
+	results << rms << "\n";
+	results.flush();
 	//fcn => subroutine
 	//m => number of functions
 	//n => number of variables (n<=m)
@@ -721,41 +741,63 @@ double CameraCalibration::calibrate_camera() {
 	//wa => work array of length lwa
 	//lwa => lwa >= m*n+5*n+m
 
-	/*int info, lwa, iwa[3];
-	real tol, fnorm, x[3], fvec[15], wa[75];
-	const int m = 15;
-	const int n = 3;*/
 
 	/* auxiliary data (e.g. measurements) */
-	/*real y[15] = { 1.4e-1, 1.8e-1, 2.2e-1, 2.5e-1, 2.9e-1, 3.2e-1, 3.5e-1,
+	real y[15] = { 1.4e-1, 1.8e-1, 2.2e-1, 2.5e-1, 2.9e-1, 3.2e-1, 3.5e-1,
 					3.9e-1, 3.7e-1, 5.8e-1, 7.3e-1, 9.6e-1, 1.34, 2.1, 4.39 };
 
 	fcndata_t data;
+	data.calibration_obj_points = calibration_obj_points;
+	data.set_points = set_points;
+	data.points = 20;
+	data.frames = calibration_obj_points.size();
+	data.rvecs = rvecs;
+	data.tvecs = tvecs;
+	const int m = data.points * data.frames;
+	const int n = 9;
 	data.m = m;
 	data.y = y;
-	*/
+	int info, lwa, iwa[n];
+	lwa = m* n + 5 * n + m;
+	real tol, fnorm, x[9], *fvec, *wa;
+	fvec = new real [m];
+	wa = new real[lwa];
 	/* the following starting values provide a rough fit. */
-
-	/*x[0] = 1.;
-	x[1] = 1.;
-	x[2] = 1.;
-
-	lwa = 75;*/
+	results << pos_i[0] << ","; //Fx
+	results.flush();
+	results << pos_j[1] << ","; //Fy
+	results.flush();
+	results << pos_i[2] << ","; //Uo
+	results.flush();
+	results << pos_j[2] << ","; //V0
+	results.flush();
+	results << rms << "\n";
+	results.flush();
+	x[0] = pos_i[0]; //Fx
+	x[1] = 0.;
+	x[2] = pos_i[2]; //Uo
+	x[3] = 0.;
+	x[4] = pos_j[1]; //Fy
+	x[5] = pos_j[2]; //Vo
+	x[6] = 0;
+	x[7] = 0;
+	x[8] = 0;
+	
 	/* set tol to the square root of the machine precision.  unless high
 		 precision solutions are required, this is the recommended
 		 setting. */
 
-	/*tol = sqrt(dpmpar(1));
+	tol = sqrt(dpmpar(1));
 	//info = __cminpack_func__(lmdif1)(fcn, &data, m, n, x, fvec, tol, iwa, wa, lwa);
-	info = lmdif1(fcn, &data, m, n, x, fvec, tol, iwa, wa, lwa);
-	*/
+	//info = lmdif1(fcn, &data, m, n, x, fvec, tol, iwa, wa, lwa);
+	
 	//fnorm = __cminpack_func__(enorm)(m, fvec);
-	/*fnorm = enorm(m, fvec);
+	fnorm = enorm(m, fvec);
 
-	printf("      final l2 norm of the residuals%15.7g\n\n", (double)fnorm);
+	/*printf("      final l2 norm of the residuals%15.7g\n\n", (double)fnorm);
 	printf("      exit parameter                %10i\n\n", info);
-	printf("      final approximate solution\n\n %15.7g%15.7g%15.7g\n",
-		(double)x[0], (double)x[1], (double)x[2]);
+	printf("      final approximate solution\n\n %15.7g%15.7g%15.7g\n%15.7g%15.7g%15.7g\n%15.7g%15.7g%15.7g\n",
+		(double)x[0], (double)x[1], (double)x[2], (double)x[3], (double)x[4], (double)x[5], (double)x[6], (double)x[7], (double)x[8]);
 		*/
 	/*cout << endl;
 	cout << "Camera_matrix" << endl;
@@ -764,18 +806,6 @@ double CameraCalibration::calibrate_camera() {
 	cout << dist_coeffs   << endl;
 	cout << "rms: "<<rms<<endl;*/
 
-	const double* pos_i = camera_matrix.ptr<double>(0);
-	const double* pos_j = camera_matrix.ptr<double>(1);
-	results<<pos_i[0]<<","; //Fx
-	results.flush();
-	results<<pos_j[1]<<","; //Fy
-	results.flush();
-	results<<pos_i[2]<<","; //Uo
-	results.flush();
-	results<<pos_j[2]<<","; //V0
-	results.flush();
-	results<<rms<<"\n";
-	results.flush();
 	return rms;
 }
 
@@ -934,20 +964,40 @@ Point2f CameraCalibration::getIntersectionPoint(int x, int y, vector<Point2f>& n
 	return intersec;
 }
 
-/*int fcn(void* p, int m, int n, const real* x, real* fvec, int iflag)
+int fcn(void* p, int m, int n, const real* x, real* fvec, int iflag)
 {
 	int i;
 	real tmp1, tmp2, tmp3;
 	const real* y = ((fcndata_t*)p)->y;
-	assert(m == 15 && n == 3);
+	//assert(m == 15 && n == 3);
 	(void)iflag;
-
-	for (i = 0; i < 15; ++i)
+	const int frames = ((fcndata_t*)p)->frames;
+	const int points = ((fcndata_t*)p)->points;
+	const vector<vector<Point3f>> calibration_obj_points= ((fcndata_t*)p)->calibration_obj_points;
+	const vector<vector<Point2f>> set_points= ((fcndata_t*)p)->set_points;
+	const vector<Mat> tvecs = ((fcndata_t*)p)->tvecs;
+	const vector<Mat> rvecs = ((fcndata_t*)p)->rvecs;
+	Mat rodrigues;
+	double fx = x[0];
+	double u = x[2];
+	double fy = x[4];
+	double v = x[5];
+	for (i = 0; i < frames; ++i)
 	{
+		for (int j = 0; j < points; ++j)
+		{
+			/*cout << "M " << i << ',' << j << endl;
+			cout << "calib: " << calibration_obj_points[i][j] << endl;
+			cout << "set: " << set_points[i][j] << endl;
+			cout << "rvec: " << rvecs[i] << endl;
+			Rodrigues(rvecs[i].t(), rodrigues);
+			cout << "rodrigues: " << endl << rodrigues << endl;
+			cout << "tvec :" << tvecs[i] << endl;*/
+		}
 		tmp1 = i + 1;
 		tmp2 = 15 - i;
 		tmp3 = (i > 7) ? tmp2 : tmp1;
 		fvec[i] = y[i] - (x[0] + tmp1 / (x[1] * tmp2 + x[2] * tmp3));
 	}
 	return 0;
-}*/
+}

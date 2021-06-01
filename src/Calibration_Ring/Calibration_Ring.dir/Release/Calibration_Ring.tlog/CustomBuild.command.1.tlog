@@ -1,6 +1,6 @@
-^C:\USERS\U1\DOCUMENTS\TESIS\SRC\CALIBRATION_RING\CMAKELISTS.TXT
+^C:\USERS\POKEL\DOCUMENTS\TESIS DOCS\TESIS_2.0\SRC\CALIBRATION_RING\CMAKELISTS.TXT
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/u1/Documents/tesis -BC:/Users/u1/Documents/tesis --check-stamp-file C:/Users/u1/Documents/tesis/src/Calibration_Ring/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/pokel/Documents/Tesis docs/Tesis_2.0" "-BC:/Users/pokel/Documents/Tesis docs/Tesis_2.0" --check-stamp-file "C:/Users/pokel/Documents/Tesis docs/Tesis_2.0/src/Calibration_Ring/CMakeFiles/generate.stamp"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

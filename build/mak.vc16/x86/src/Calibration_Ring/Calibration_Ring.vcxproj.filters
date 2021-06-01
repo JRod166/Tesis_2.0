@@ -1,0 +1,30 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <ClCompile Include="C:\Users\pokel\Documents\Tesis docs\Tesis_2.0\src\Calibration_Ring\main_calibration_ring.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="C:\Users\pokel\Documents\Tesis docs\Tesis_2.0\src\Calibration_Ring\calibration_utils.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pokel\Documents\Tesis docs\Tesis_2.0\src\Calibration_Ring\camera_calibration.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="C:\Users\pokel\Documents\Tesis docs\Tesis_2.0\src\Calibration_Ring\camera_calibration_ring.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+  </ItemGroup>
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\pokel\Documents\Tesis docs\Tesis_2.0\src\Calibration_Ring\CMakeLists.txt" />
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="Header Files">
+      <UniqueIdentifier>{366443E6-E676-3AC1-8423-77B576F38BB8}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files">
+      <UniqueIdentifier>{F7F56479-8C2A-30E8-B289-5BF5836ACCBA}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

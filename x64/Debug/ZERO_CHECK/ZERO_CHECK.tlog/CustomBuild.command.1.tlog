@@ -1,6 +1,6 @@
-^C:\USERS\U1\DOCUMENTS\TESIS\CMAKEFILES\23167A0A34425E4FCDDFEEF3D8D7A378\GENERATE.STAMP.RULE
+^C:\USERS\POKEL\DOCUMENTS\TESIS DOCS\TESIS_2.0\CMAKEFILES\077DE9E4556DAE442C8DA997E22C86F7\GENERATE.STAMP.RULE
 setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/u1/Documents/tesis -BC:/Users/u1/Documents/tesis --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file C:/Users/u1/Documents/tesis/Rodrigo_Project_Tests.sln
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/pokel/Documents/Tesis docs/Tesis_2.0" "-BC:/Users/pokel/Documents/Tesis docs/Tesis_2.0" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/pokel/Documents/Tesis docs/Tesis_2.0/Rodrigo_Project_Tests.sln"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone

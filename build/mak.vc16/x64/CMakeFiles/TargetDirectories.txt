@@ -1,0 +1,4 @@
+C:/Users/pokel/Documents/Tesis docs/Tesis_2.0/build/mak.vc16/x64/CMakeFiles/ALL_BUILD.dir
+C:/Users/pokel/Documents/Tesis docs/Tesis_2.0/build/mak.vc16/x64/CMakeFiles/ZERO_CHECK.dir
+C:/Users/pokel/Documents/Tesis docs/Tesis_2.0/build/mak.vc16/x64/src/Calibration_Ring/CMakeFiles/Calibration_Ring.dir
+C:/Users/pokel/Documents/Tesis docs/Tesis_2.0/build/mak.vc16/x64/src/Calibration_Ring/CMakeFiles/ALL_BUILD.dir

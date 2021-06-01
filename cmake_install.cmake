@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/u1/Documents/tesis
+# Install script for directory: C:/Users/pokel/Documents/Tesis docs/Tesis_2.0
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,7 +34,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Users/u1/Documents/tesis/src/cmake_install.cmake")
+  include("C:/Users/pokel/Documents/Tesis docs/Tesis_2.0/src/cmake_install.cmake")
 
 endif()
 
@@ -46,5 +46,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "C:/Users/u1/Documents/tesis/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "C:/Users/pokel/Documents/Tesis docs/Tesis_2.0/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

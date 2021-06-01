@@ -1,0 +1,13 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <CustomBuild Include="C:\Users\pokel\Documents\Tesis docs\Tesis_2.0\build\mak.vc16\x86\CMakeFiles\ad4ed5310cc11605d75bf0e452d109f5\generate.stamp.rule">
+      <Filter>CMake Rules</Filter>
+    </CustomBuild>
+  </ItemGroup>
+  <ItemGroup>
+    <Filter Include="CMake Rules">
+      <UniqueIdentifier>{CFD27E33-E699-3846-999B-F5A8789D84D1}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+</Project>

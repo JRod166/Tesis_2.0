@@ -1,0 +1,10 @@
+^C:\USERS\POKEL\DOCUMENTS\TESIS DOCS\TESIS_2.0\BUILD\MAK.VC16\X86\CMAKEFILES\AD4ED5310CC11605D75BF0E452D109F5\GENERATE.STAMP.RULE
+setlocal
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/pokel/Documents/Tesis docs/Tesis_2.0" "-BC:/Users/pokel/Documents/Tesis docs/Tesis_2.0/build/mak.vc16/x86" --check-stamp-list CMakeFiles/generate.stamp.list --vs-solution-file "C:/Users/pokel/Documents/Tesis docs/Tesis_2.0/build/mak.vc16/x86/Rodrigo_Project_Tests.sln"
+if %errorlevel% neq 0 goto :cmEnd
+:cmEnd
+endlocal & call :cmErrorLevel %errorlevel% & goto :cmDone
+:cmErrorLevel
+exit /b %1
+:cmDone
+if %errorlevel% neq 0 goto :VCEnd

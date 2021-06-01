@@ -6,7 +6,7 @@
 #include "camera_calibration_ring.h"
 #include <fstream>
 
-
+#include <cminpack.h>
 
 
 #define INTRO_KEY 13
@@ -131,7 +131,7 @@ int main( int argc, char** argv ) {
         
         //string vidFile = "/home/pokelover/Documentos/automatic_camera_calibration/ring_calibration_videos/"+videos[i];
         //string vidFile = "/home/manuel/Documents/Projects/OpenCV/Rodrigo_Tesis/seminario-tesis/data/"+videos[i];
-		string vidFile = "C:/Users/u1/Documents/tesis/ring_calibration_videos/" + videos[i];
+		string vidFile = "C:/Users/pokel/Documents/Tesis docs/Tesis_2.0/ring_calibration_videos/" + videos[i];
         
 
 
@@ -152,7 +152,7 @@ int main( int argc, char** argv ) {
         //}
         
 
-        int n_frames  = 80;
+        int n_frames  = 10;
         int grid_cols = 8;
         int grid_rows = 8;
 

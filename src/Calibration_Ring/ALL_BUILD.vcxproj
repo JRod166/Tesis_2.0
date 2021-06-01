@@ -22,8 +22,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <PropertyGroup Label="Globals">
-    <ProjectGuid>{2840852D-953C-37BE-96B0-0EEB7BF3C5B8}</ProjectGuid>
-    <WindowsTargetPlatformVersion>10.0.17134.0</WindowsTargetPlatformVersion>
+    <ProjectGuid>{8B4FB219-C8BD-3C06-B54E-1A8E196B5657}</ProjectGuid>
+    <WindowsTargetPlatformVersion>10.0.19041.0</WindowsTargetPlatformVersion>
     <Keyword>Win32Proj</Keyword>
     <Platform>x64</Platform>
     <ProjectName>ALL_BUILD</ProjectName>
@@ -66,7 +66,7 @@
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\u1\Documents\tesis\src\Calibration_Ring\src\Calibration_Ring\ring;D:\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\pokel\Documents\Tesis docs\Tesis_2.0\src\Calibration_Ring\src\Calibration_Ring\ring;D:\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -76,7 +76,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\u1\Documents\tesis\src\Calibration_Ring\src\Calibration_Ring\ring;D:\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\pokel\Documents\Tesis docs\Tesis_2.0\src\Calibration_Ring\src\Calibration_Ring\ring;D:\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -86,7 +86,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\u1\Documents\tesis\src\Calibration_Ring\src\Calibration_Ring\ring;D:\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\pokel\Documents\Tesis docs\Tesis_2.0\src\Calibration_Ring\src\Calibration_Ring\ring;D:\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -96,7 +96,7 @@
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">
     <Midl>
-      <AdditionalIncludeDirectories>C:\Users\u1\Documents\tesis\src\Calibration_Ring\src\Calibration_Ring\ring;D:\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\pokel\Documents\Tesis docs\Tesis_2.0\src\Calibration_Ring\src\Calibration_Ring\ring;D:\opencv\build\include;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <OutputDirectory>$(ProjectDir)/$(IntDir)</OutputDirectory>
       <HeaderFileName>%(Filename).h</HeaderFileName>
       <TypeLibraryName>%(Filename).tlb</TypeLibraryName>
@@ -105,11 +105,11 @@
     </Midl>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\u1\Documents\tesis\src\Calibration_Ring\CMakeLists.txt">
+    <CustomBuild Include="C:\Users\pokel\Documents\Tesis docs\Tesis_2.0\src\Calibration_Ring\CMakeLists.txt">
       <StdOutEncoding>UTF-8</StdOutEncoding>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/u1/Documents/tesis/src/Calibration_Ring/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">Building Custom Rule C:/Users/pokel/Documents/Tesis docs/Tesis_2.0/src/Calibration_Ring/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/u1/Documents/tesis -BC:/Users/u1/Documents/tesis --check-stamp-file C:/Users/u1/Documents/tesis/src/Calibration_Ring/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/pokel/Documents/Tesis docs/Tesis_2.0" "-BC:/Users/pokel/Documents/Tesis docs/Tesis_2.0" --check-stamp-file "C:/Users/pokel/Documents/Tesis docs/Tesis_2.0/src/Calibration_Ring/CMakeFiles/generate.stamp"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -117,12 +117,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.19\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\FindPackageMessage.cmake;D:\opencv\build\OpenCVConfig-version.cmake;D:\opencv\build\OpenCVConfig.cmake;D:\opencv\build\x64\vc15\lib\OpenCVConfig.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules-debug.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules-release.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\u1\Documents\tesis\src\Calibration_Ring\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Program Files\CMake\share\cmake-3.20\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\FindPackageMessage.cmake;D:\opencv\build\OpenCVConfig-version.cmake;D:\opencv\build\OpenCVConfig.cmake;D:\opencv\build\x64\vc15\lib\OpenCVConfig.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules-debug.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules-release.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">C:\Users\pokel\Documents\Tesis docs\Tesis_2.0\src\Calibration_Ring\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/u1/Documents/tesis/src/Calibration_Ring/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='Release|x64'">Building Custom Rule C:/Users/pokel/Documents/Tesis docs/Tesis_2.0/src/Calibration_Ring/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='Release|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/u1/Documents/tesis -BC:/Users/u1/Documents/tesis --check-stamp-file C:/Users/u1/Documents/tesis/src/Calibration_Ring/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/pokel/Documents/Tesis docs/Tesis_2.0" "-BC:/Users/pokel/Documents/Tesis docs/Tesis_2.0" --check-stamp-file "C:/Users/pokel/Documents/Tesis docs/Tesis_2.0/src/Calibration_Ring/CMakeFiles/generate.stamp"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -130,12 +130,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.19\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\FindPackageMessage.cmake;D:\opencv\build\OpenCVConfig-version.cmake;D:\opencv\build\OpenCVConfig.cmake;D:\opencv\build\x64\vc15\lib\OpenCVConfig.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules-debug.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules-release.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\u1\Documents\tesis\src\Calibration_Ring\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Program Files\CMake\share\cmake-3.20\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\FindPackageMessage.cmake;D:\opencv\build\OpenCVConfig-version.cmake;D:\opencv\build\OpenCVConfig.cmake;D:\opencv\build\x64\vc15\lib\OpenCVConfig.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules-debug.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules-release.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='Release|x64'">C:\Users\pokel\Documents\Tesis docs\Tesis_2.0\src\Calibration_Ring\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='Release|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/u1/Documents/tesis/src/Calibration_Ring/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">Building Custom Rule C:/Users/pokel/Documents/Tesis docs/Tesis_2.0/src/Calibration_Ring/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/u1/Documents/tesis -BC:/Users/u1/Documents/tesis --check-stamp-file C:/Users/u1/Documents/tesis/src/Calibration_Ring/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/pokel/Documents/Tesis docs/Tesis_2.0" "-BC:/Users/pokel/Documents/Tesis docs/Tesis_2.0" --check-stamp-file "C:/Users/pokel/Documents/Tesis docs/Tesis_2.0/src/Calibration_Ring/CMakeFiles/generate.stamp"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -143,12 +143,12 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.19\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\FindPackageMessage.cmake;D:\opencv\build\OpenCVConfig-version.cmake;D:\opencv\build\OpenCVConfig.cmake;D:\opencv\build\x64\vc15\lib\OpenCVConfig.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules-debug.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules-release.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\u1\Documents\tesis\src\Calibration_Ring\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Program Files\CMake\share\cmake-3.20\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\FindPackageMessage.cmake;D:\opencv\build\OpenCVConfig-version.cmake;D:\opencv\build\OpenCVConfig.cmake;D:\opencv\build\x64\vc15\lib\OpenCVConfig.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules-debug.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules-release.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">C:\Users\pokel\Documents\Tesis docs\Tesis_2.0\src\Calibration_Ring\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='MinSizeRel|x64'">false</LinkObjects>
-      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/u1/Documents/tesis/src/Calibration_Ring/CMakeLists.txt</Message>
+      <Message Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">Building Custom Rule C:/Users/pokel/Documents/Tesis docs/Tesis_2.0/src/Calibration_Ring/CMakeLists.txt</Message>
       <Command Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">setlocal
-"C:\Program Files\CMake\bin\cmake.exe" -SC:/Users/u1/Documents/tesis -BC:/Users/u1/Documents/tesis --check-stamp-file C:/Users/u1/Documents/tesis/src/Calibration_Ring/CMakeFiles/generate.stamp
+"C:\Program Files\CMake\bin\cmake.exe" "-SC:/Users/pokel/Documents/Tesis docs/Tesis_2.0" "-BC:/Users/pokel/Documents/Tesis docs/Tesis_2.0" --check-stamp-file "C:/Users/pokel/Documents/Tesis docs/Tesis_2.0/src/Calibration_Ring/CMakeFiles/generate.stamp"
 if %errorlevel% neq 0 goto :cmEnd
 :cmEnd
 endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
@@ -156,22 +156,22 @@ endlocal &amp; call :cmErrorLevel %errorlevel% &amp; goto :cmDone
 exit /b %1
 :cmDone
 if %errorlevel% neq 0 goto :VCEnd</Command>
-      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.19\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.19\Modules\FindPackageMessage.cmake;D:\opencv\build\OpenCVConfig-version.cmake;D:\opencv\build\OpenCVConfig.cmake;D:\opencv\build\x64\vc15\lib\OpenCVConfig.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules-debug.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules-release.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules.cmake;%(AdditionalInputs)</AdditionalInputs>
-      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\u1\Documents\tesis\src\Calibration_Ring\CMakeFiles\generate.stamp</Outputs>
+      <AdditionalInputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Program Files\CMake\share\cmake-3.20\Modules\FindPackageHandleStandardArgs.cmake;C:\Program Files\CMake\share\cmake-3.20\Modules\FindPackageMessage.cmake;D:\opencv\build\OpenCVConfig-version.cmake;D:\opencv\build\OpenCVConfig.cmake;D:\opencv\build\x64\vc15\lib\OpenCVConfig.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules-debug.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules-release.cmake;D:\opencv\build\x64\vc15\lib\OpenCVModules.cmake;%(AdditionalInputs)</AdditionalInputs>
+      <Outputs Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">C:\Users\pokel\Documents\Tesis docs\Tesis_2.0\src\Calibration_Ring\CMakeFiles\generate.stamp</Outputs>
       <LinkObjects Condition="'$(Configuration)|$(Platform)'=='RelWithDebInfo|x64'">false</LinkObjects>
     </CustomBuild>
   </ItemGroup>
   <ItemGroup>
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="C:\Users\u1\Documents\tesis\ZERO_CHECK.vcxproj">
-      <Project>{11414EA0-D564-3FCA-8797-0AAE524EF2EF}</Project>
+    <ProjectReference Include="C:\Users\pokel\Documents\Tesis docs\Tesis_2.0\ZERO_CHECK.vcxproj">
+      <Project>{3BB869E3-25C6-3639-BE60-42EE9EEF1D47}</Project>
       <Name>ZERO_CHECK</Name>
       <ReferenceOutputAssembly>false</ReferenceOutputAssembly>
       <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </ProjectReference>
-    <ProjectReference Include="C:\Users\u1\Documents\tesis\src\Calibration_Ring\Calibration_Ring.vcxproj">
-      <Project>{9FA5FB6E-0C93-3034-B3CA-D4246D2312EF}</Project>
+    <ProjectReference Include="C:\Users\pokel\Documents\Tesis docs\Tesis_2.0\src\Calibration_Ring\Calibration_Ring.vcxproj">
+      <Project>{70EDCCE1-6F6B-33DA-8298-B5684BB2A197}</Project>
       <Name>Calibration_Ring</Name>
     </ProjectReference>
   </ItemGroup>

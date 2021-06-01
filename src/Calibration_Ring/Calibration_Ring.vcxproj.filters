@@ -1,30 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project ToolsVersion="16.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
-    <ClCompile Include="C:\Users\u1\Documents\tesis\src\Calibration_Ring\main_calibration_ring.cpp">
+    <ClCompile Include="C:\Users\pokel\Documents\Tesis docs\Tesis_2.0\src\Calibration_Ring\main_calibration_ring.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="C:\Users\u1\Documents\tesis\src\Calibration_Ring\calibration_utils.h">
+    <ClInclude Include="C:\Users\pokel\Documents\Tesis docs\Tesis_2.0\src\Calibration_Ring\calibration_utils.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration.h">
+    <ClInclude Include="C:\Users\pokel\Documents\Tesis docs\Tesis_2.0\src\Calibration_Ring\camera_calibration.h">
       <Filter>Header Files</Filter>
     </ClInclude>
-    <ClInclude Include="C:\Users\u1\Documents\tesis\src\Calibration_Ring\camera_calibration_ring.h">
+    <ClInclude Include="C:\Users\pokel\Documents\Tesis docs\Tesis_2.0\src\Calibration_Ring\camera_calibration_ring.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="C:\Users\u1\Documents\tesis\src\Calibration_Ring\CMakeLists.txt" />
+    <CustomBuild Include="C:\Users\pokel\Documents\Tesis docs\Tesis_2.0\src\Calibration_Ring\CMakeLists.txt" />
   </ItemGroup>
   <ItemGroup>
     <Filter Include="Header Files">
-      <UniqueIdentifier>{2FE1AF55-EF70-347C-89E5-780B24096526}</UniqueIdentifier>
+      <UniqueIdentifier>{AB206F4D-3010-3CE3-B072-31BB633DF366}</UniqueIdentifier>
     </Filter>
     <Filter Include="Source Files">
-      <UniqueIdentifier>{024D58F0-5B49-3CFA-88F3-2F31009CF032}</UniqueIdentifier>
+      <UniqueIdentifier>{8E79152B-317F-32BE-A114-341C7598BE2F}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
 </Project>

@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/u1/Documents/tesis/src/Calibration_Ring
+# Install script for directory: C:/Users/pokel/Documents/Tesis docs/Tesis_2.0/src/Calibration_Ring
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)

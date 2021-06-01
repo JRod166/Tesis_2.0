@@ -1,4 +1,4 @@
-# Install script for directory: C:/Users/u1/Documents/tesis/src
+# Install script for directory: C:/Users/pokel/Documents/Tesis docs/Tesis_2.0/src
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -34,7 +34,7 @@ endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("C:/Users/u1/Documents/tesis/src/Calibration_Ring/cmake_install.cmake")
+  include("C:/Users/pokel/Documents/Tesis docs/Tesis_2.0/src/Calibration_Ring/cmake_install.cmake")
 
 endif()
 
