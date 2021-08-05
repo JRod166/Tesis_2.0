@@ -753,7 +753,7 @@ double CameraCalibration::calibrate_camera() {
 	//wa => work array of length lwa
 	//lwa => lwa >= m*n+5*n+m
 
-	/*
+	
 	real y[15] = {1.4e-1, 1.8e-1, 2.2e-1, 2.5e-1, 2.9e-1, 3.2e-1, 3.5e-1,
 					3.9e-1, 3.7e-1, 5.8e-1, 7.3e-1, 9.6e-1, 1.34, 2.1, 4.39 };
 
@@ -874,7 +874,7 @@ double CameraCalibration::calibrate_camera() {
 		sum += error * error;
 	}
 	rms = sqrt(sum / (calibration_obj_points.size() * 20));
-	*/
+	
 	results << pos_i[0] << ","; //Fx
 	results.flush();
 	results << pos_j[1] << ","; //Fy

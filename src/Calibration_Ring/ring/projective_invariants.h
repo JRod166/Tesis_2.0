@@ -58,8 +58,8 @@ class projective_invariants{
       }
       colinear = check_colinearity();
       angular_related = check_angle_cr();
-      colinear = true;
-      angular_related = true;
+      //colinear = true;
+      //angular_related = true;
     }
 
     bool check_colinearity()
