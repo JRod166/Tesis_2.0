@@ -42,8 +42,14 @@ typedef struct {
 	vector<vector<Point2f>> set_points;
 	vector<Mat> tvecs;
 	vector<Mat> rvecs;
+	vector<float> avg_collinear;
+	vector<float> avg_angular;
+	Mat dist_coeffs;
+	Mat camera_matrix;
 } fcndata_t;
 int fcn(void* p, int m, int n, const real* x, real* fvec, int iflag);
+int fcn_1(void* p, int m, int n, const real* x, real* fvec, int iflag);
+int fcn_2(void* p, int m, int n, const real* x, real* fvec, int iflag);
 class CameraCalibration {
 public:
 	vector<vector<Point2f>> set_points;
@@ -69,6 +75,8 @@ public:
 	float average_collinear_error = 0.0;
 	float average_angular_error = 0.0;
 	string actualDoc;
+	vector<float> avg_collinear;
+	vector<float> avg_angular;
 
 	CameraCalibration(VideoCapture &cap, int cols, int rows, float square_size) {
 		this->pattern_cols = cols;
@@ -322,6 +330,8 @@ public:
 							average_collinear_error += invariants.accumulated_colinear_error;
 							circle(m_centroids, Point2f(c_x, c_y), 6, Scalar(0, 255, 0), -1);
 							frames.push_back(frame);
+							avg_collinear.push_back(invariants.accumulated_colinear_error);
+							avg_angular.push_back(invariants.accumulated_angular_error);
 							for ( int f = 0 ; f < pattern_points.size() ; f++)
 							{
 								circle(frame, pattern_points[f], 1, Scalar(0,255,255), -1);
@@ -470,7 +480,7 @@ public:
 		double threshold = 0.00005;
 		//cout<<"RMS: "<<prev_rms<<endl;
 		//cout<<prev_rms<<" -->  "<<this_rms<<" ==> "<<abs(this_rms-prev_rms)<<endl;
-		for (int i = 0; abs(this_rms-prev_rms) > threshold ; i++) {
+		for (int i = 0; abs(this_rms - prev_rms) > threshold /* i < 10 */; i++) {
 			prev_rms = this_rms;
 			iteration++;
 			results<<"Iteration "<<i+1<<',';
@@ -561,6 +571,8 @@ void CameraCalibration::collect_points_fronto_parallel(int refine_type, int refi
 	vector<Point2f> points_fronto_parallel;
 
 	set_points.clear();
+	avg_collinear.clear();
+	avg_angular.clear();
   int	frame_number = 0;
 	for (int f = 0; f < frames.size(); f++) {
 		frame_number++;
@@ -592,7 +604,7 @@ void CameraCalibration::collect_points_fronto_parallel(int refine_type, int refi
 		
 
 		for (int p = 0; p < board_points; p++){
-			circle(input_undistorted, points_undistorted[p], 2, Scalar(0, 255, 0));
+			circle(input_undistorted, points_undistorted[p], 2, Scalar(0, 0, 255));
 			imwrite("images/"+actualDoc+"/"+to_string(iteration)+'-'+to_string(p)+"-reproject.jpg", input_undistorted);
 		}
 
@@ -652,6 +664,8 @@ void CameraCalibration::collect_points_fronto_parallel(int refine_type, int refi
 					distort_points(new_points2D, new_points2D_distort);
 
 					set_points.push_back(new_points2D_distort);
+					avg_collinear.push_back(undistorted_invariant.accumulated_colinear_error);
+					avg_angular.push_back(undistorted_invariant.accumulated_angular_error);
 					//start_set_points.push_back(points_undistorted);
 					//new_set_points.push_back(new_points2D);
 					}
@@ -689,8 +703,10 @@ double CameraCalibration::calibrate_camera() {
 	calibration_obj_points[0].resize(0);
 	calibration_obj_points[0] = object_points;
 	calibration_obj_points.resize(set_points.size(), calibration_obj_points[0]);
-	//cout<<set_points.size()<<endl;
-	cout<<"Calibrating"<<endl;
+	/*cout << set_points.size() << endl;
+	cout << avg_angular.size() << endl;
+	cout << avg_collinear.size() << endl;
+	cout<<"Calibrating"<<endl;*/
 	double rms = calibrateCamera(calibration_obj_points,
 	                             set_points,
 	                             image_size,
@@ -705,16 +721,12 @@ double CameraCalibration::calibrate_camera() {
 
 	const double* pos_i = camera_matrix.ptr<double>(0);
 	const double* pos_j = camera_matrix.ptr<double>(1);
-	results << pos_i[0] << ","; //Fx
-	results.flush();
-	results << pos_j[1] << ","; //Fy
-	results.flush();
-	results << pos_i[2] << ","; //Uo
-	results.flush();
-	results << pos_j[2] << ","; //V0
-	results.flush();
-	results << rms << "\n";
-	results.flush();
+	
+	real sum = .0;
+	Mat rodrigues;
+	Mat K = camera_matrix;
+	vector<Point2f> out;
+
 	//fcn => subroutine
 	//m => number of functions
 	//n => number of variables (n<=m)
@@ -741,9 +753,8 @@ double CameraCalibration::calibrate_camera() {
 	//wa => work array of length lwa
 	//lwa => lwa >= m*n+5*n+m
 
-
-	/* auxiliary data (e.g. measurements) */
-	real y[15] = { 1.4e-1, 1.8e-1, 2.2e-1, 2.5e-1, 2.9e-1, 3.2e-1, 3.5e-1,
+	/*
+	real y[15] = {1.4e-1, 1.8e-1, 2.2e-1, 2.5e-1, 2.9e-1, 3.2e-1, 3.5e-1,
 					3.9e-1, 3.7e-1, 5.8e-1, 7.3e-1, 9.6e-1, 1.34, 2.1, 4.39 };
 
 	fcndata_t data;
@@ -753,16 +764,117 @@ double CameraCalibration::calibrate_camera() {
 	data.frames = calibration_obj_points.size();
 	data.rvecs = rvecs;
 	data.tvecs = tvecs;
+	data.avg_collinear = avg_collinear;
+	data.avg_angular = avg_angular;
+	data.dist_coeffs = dist_coeffs;
 	const int m = data.points * data.frames;
 	const int n = 9;
 	data.m = m;
 	data.y = y;
 	int info, lwa, iwa[n];
 	lwa = m* n + 5 * n + m;
-	real tol, fnorm, x[9], *fvec, *wa;
+	real tol, fnorm, x[9], *fvec, *wa, x_2[14];
 	fvec = new real [m];
 	wa = new real[lwa];
-	/* the following starting values provide a rough fit. */
+	x[0] = pos_i[0]; //Fx
+	x[1] = 0.;
+	x[2] = pos_i[2]; //Uo
+	x[3] = 0.;
+	x[4] = pos_j[1]; //Fy
+	x[5] = pos_j[2]; //Vo
+	x[6] = 0;
+	x[7] = 0;
+	x[8] = 1;
+
+	x_2[0] = pos_i[0]; //Fx
+	x_2[1] = 0.;
+	x_2[2] = pos_i[2]; //Uo
+	x_2[3] = 0.;
+	x_2[4] = pos_j[1]; //Fy
+	x_2[5] = pos_j[2]; //Vo
+	x_2[6] = 0;
+	x_2[7] = 0;
+	x_2[8] = 1;
+
+	tol = sqrt(dpmpar(1));
+	
+	info = lmdif1(fcn, &data, m, n, x, fvec, tol, iwa, wa, lwa);
+		
+	fnorm = enorm(m, fvec);
+
+
+	camera_matrix.at<double>(0, 0) = (float)x[0];
+	camera_matrix.at<double>(0, 2) = (float)x[2];
+	camera_matrix.at<double>(1, 1) = (float)x[4];
+	camera_matrix.at<double>(1, 2) = (float)x[5];
+	camera_matrix.at<double>(2, 2) = (float)x[8];
+
+	const int n_1 = 5;
+	int info_1, lwa_1, iwa_1[n_1];
+	lwa_1 = m * n_1 + 5 * n_1 + m;
+	real tol_1, fnorm_1, x_1[5], * fvec_1, * wa_1;
+	fvec_1 = new real[m];
+	wa_1 = new real[lwa_1];
+	data.camera_matrix = camera_matrix;
+	
+	x_1[0] = dist_coeffs.at<double>(0,0);
+	x_1[1] = dist_coeffs.at<double>(0, 1);
+	x_1[2] = dist_coeffs.at<double>(0, 2);
+	x_1[3] = dist_coeffs.at<double>(0, 3);
+	x_1[4] = dist_coeffs.at<double>(0, 4);
+
+	x_2[9] = dist_coeffs.at<double>(0, 0);
+	x_2[10] = dist_coeffs.at<double>(0, 1);
+	x_2[11] = dist_coeffs.at<double>(0, 2);
+	x_2[12] = dist_coeffs.at<double>(0, 3);
+	x_2[13] = dist_coeffs.at<double>(0, 4);
+
+	tol_1 = sqrt(dpmpar(1));
+
+	info = lmdif1(fcn_1, &data, m, n_1, x_1, fvec_1, tol_1, iwa_1, wa_1, lwa_1);
+
+	fnorm_1 = enorm(m, fvec_1);
+	
+	dist_coeffs.at<double>(0, 0) = (float)x_1[0];
+	dist_coeffs.at<double>(0, 1) = (float)x_1[1];
+	dist_coeffs.at<double>(0, 2) = (float)x_1[2];
+	dist_coeffs.at<double>(0, 3) = (float)x_1[3];
+	dist_coeffs.at<double>(0, 4) = (float)x_1[4];
+
+	const int n_2 = 14;
+	int info_2, lwa_2, iwa_2[n_2];
+	lwa_2 = m * n_2 + 5 * n_2 + m;
+	real tol_2, fnorm_2, * fvec_2, * wa_2;
+	fvec_2 = new real[m];
+	wa_2 = new real[lwa_2];
+	
+	tol_2 = sqrt(dpmpar(1));
+
+	info = lmdif1(fcn_2, &data, m, n_2, x_2, fvec_2, tol_2, iwa_2, wa_2, lwa_2);
+
+	fnorm_2 = enorm(m, fvec_2);
+
+
+	camera_matrix.at<double>(0, 0) = (float)x_2[0];
+	camera_matrix.at<double>(0, 2) = (float)x_2[2];
+	camera_matrix.at<double>(1, 1) = (float)x_2[4];
+	camera_matrix.at<double>(1, 2) = (float)x_2[5];
+	camera_matrix.at<double>(2, 2) = (float)x_2[8];
+	dist_coeffs.at<double>(0, 0) = (float)x_2[9];
+	dist_coeffs.at<double>(0, 1) = (float)x_2[10];
+	dist_coeffs.at<double>(0, 2) = (float)x_2[11];
+	dist_coeffs.at<double>(0, 3) = (float)x_2[12];
+	dist_coeffs.at<double>(0, 4) = (float)x_2[13];
+	
+
+	for (int i = 0; i < calibration_obj_points.size(); ++i)
+	{
+		projectPoints(calibration_obj_points[i], rvecs[i], tvecs[i], camera_matrix, dist_coeffs, out);
+		real error = norm(set_points[i], out, NORM_L2);
+		sum += error * error;
+	}
+	rms = sqrt(sum / (calibration_obj_points.size() * 20));
+	*/
 	results << pos_i[0] << ","; //Fx
 	results.flush();
 	results << pos_j[1] << ","; //Fy
@@ -773,39 +885,6 @@ double CameraCalibration::calibrate_camera() {
 	results.flush();
 	results << rms << "\n";
 	results.flush();
-	x[0] = pos_i[0]; //Fx
-	x[1] = 0.;
-	x[2] = pos_i[2]; //Uo
-	x[3] = 0.;
-	x[4] = pos_j[1]; //Fy
-	x[5] = pos_j[2]; //Vo
-	x[6] = 0;
-	x[7] = 0;
-	x[8] = 0;
-	
-	/* set tol to the square root of the machine precision.  unless high
-		 precision solutions are required, this is the recommended
-		 setting. */
-
-	tol = sqrt(dpmpar(1));
-	//info = __cminpack_func__(lmdif1)(fcn, &data, m, n, x, fvec, tol, iwa, wa, lwa);
-	//info = lmdif1(fcn, &data, m, n, x, fvec, tol, iwa, wa, lwa);
-	
-	//fnorm = __cminpack_func__(enorm)(m, fvec);
-	fnorm = enorm(m, fvec);
-
-	/*printf("      final l2 norm of the residuals%15.7g\n\n", (double)fnorm);
-	printf("      exit parameter                %10i\n\n", info);
-	printf("      final approximate solution\n\n %15.7g%15.7g%15.7g\n%15.7g%15.7g%15.7g\n%15.7g%15.7g%15.7g\n",
-		(double)x[0], (double)x[1], (double)x[2], (double)x[3], (double)x[4], (double)x[5], (double)x[6], (double)x[7], (double)x[8]);
-		*/
-	/*cout << endl;
-	cout << "Camera_matrix" << endl;
-	cout << camera_matrix << endl;
-	cout << "Dist_coeffs" << endl;
-	cout << dist_coeffs   << endl;
-	cout << "rms: "<<rms<<endl;*/
-
 	return rms;
 }
 
@@ -974,30 +1053,216 @@ int fcn(void* p, int m, int n, const real* x, real* fvec, int iflag)
 	const int frames = ((fcndata_t*)p)->frames;
 	const int points = ((fcndata_t*)p)->points;
 	const vector<vector<Point3f>> calibration_obj_points= ((fcndata_t*)p)->calibration_obj_points;
-	const vector<vector<Point2f>> set_points= ((fcndata_t*)p)->set_points;
+	const vector<vector<Point2f>> set_points_in= ((fcndata_t*)p)->set_points;
+	//const vector<vector<Point2f>> set_points = ((fcndata_t*)p)->set_points;
+	vector<Point2f> set_points;
+	vector<Point3f> cal_points;
 	const vector<Mat> tvecs = ((fcndata_t*)p)->tvecs;
 	const vector<Mat> rvecs = ((fcndata_t*)p)->rvecs;
+	Mat dist_coeffs = ((fcndata_t*)p)->dist_coeffs;
 	Mat rodrigues;
+	Mat K = Mat::zeros(cv::Size(3, 3), CV_64F);
+	K.at<double>(0, 0) = x[0];
+	K.at<double>(0, 2) = x[2];
+	K.at<double>(1, 1) = x[4];
+	K.at<double>(1, 2) = x[5];
+	K.at<double>(2, 2) = x[8];
 	double fx = x[0];
 	double u = x[2];
 	double fy = x[4];
 	double v = x[5];
+	float sum = .0;
+
 	for (i = 0; i < frames; ++i)
 	{
+			/*cout << "set points: " << set_points_in[i] << endl;
+			cout << "dist coeffs: " << dist_coeffs << endl;*/
+			//cv::undistortPoints(set_points_in[i], set_points, K, dist_coeffs);
+			set_points = set_points_in[i];
+			//cout << "set_points" << endl;
 		for (int j = 0; j < points; ++j)
 		{
-			/*cout << "M " << i << ',' << j << endl;
-			cout << "calib: " << calibration_obj_points[i][j] << endl;
-			cout << "set: " << set_points[i][j] << endl;
-			cout << "rvec: " << rvecs[i] << endl;
 			Rodrigues(rvecs[i].t(), rodrigues);
-			cout << "rodrigues: " << endl << rodrigues << endl;
-			cout << "tvec :" << tvecs[i] << endl;*/
+			Mat Rt;
+			hconcat(rodrigues, tvecs[i], Rt);
+			Mat M = K * Rt;
+			vector<Point2f> temp_2d, out_2d;
+			Point2f point_tmp = Point2f(calibration_obj_points[i][j].x, calibration_obj_points[i][j].y);
+			temp_2d.push_back(point_tmp);
+			undistortPoints(temp_2d, out_2d, K, dist_coeffs);
+			//vector <float> aux{ calibration_obj_points[i][j].x, calibration_obj_points[i][j].y, calibration_obj_points[i][j].z, 1 };
+			vector <float> aux{ out_2d[0].x, out_2d[0].y, calibration_obj_points[i][j].z, 1 };
+			Mat calpoint (aux);
+			calpoint.convertTo(calpoint, CV_64F);
+			Mat auxpoint = calpoint;
+			Mat aux1 = M;
+			Mat mult2 = aux1 * auxpoint;
+			Mat result = Mat::zeros(cv::Size(1, 3), CV_64F);
+			result.at<double>(0, 0) = set_points[j].x - mult2.at<double>(0, 0);
+			result.at<double>(1, 0) = set_points[j].y - mult2.at<double>(1, 0);
+			result.at<double>(2, 0) = 1 - mult2.at<double>(2, 0);
+			sum = pow(norm(result,NormTypes::NORM_L2), 2);
+			fvec[i * points + j] += sum;
 		}
-		tmp1 = i + 1;
-		tmp2 = 15 - i;
-		tmp3 = (i > 7) ? tmp2 : tmp1;
-		fvec[i] = y[i] - (x[0] + tmp1 / (x[1] * tmp2 + x[2] * tmp3));
+	}
+	return 0;
+}
+
+int fcn_1(void* p, int m, int n, const real* x, real* fvec, int iflag)
+{
+	int i;
+	real tmp1, tmp2, tmp3;
+	const real* y = ((fcndata_t*)p)->y;
+	//assert(m == 15 && n == 3);
+	(void)iflag;
+	const int frames = ((fcndata_t*)p)->frames;
+	const int points = ((fcndata_t*)p)->points;
+	const vector<vector<Point3f>> calibration_obj_points = ((fcndata_t*)p)->calibration_obj_points;
+	const vector<vector<Point2f>> set_points_in = ((fcndata_t*)p)->set_points;
+	//const vector<vector<Point2f>> set_points = ((fcndata_t*)p)->set_points;
+	vector<Point2f> set_points;
+	vector<Point3f> cal_points;
+	const vector<Mat> tvecs = ((fcndata_t*)p)->tvecs;
+	const vector<Mat> rvecs = ((fcndata_t*)p)->rvecs;
+	const Mat camera_matrix = ((fcndata_t*)p)->camera_matrix;
+	const vector<float> average_col = ((fcndata_t*)p)->avg_collinear;
+	const vector<float> average_ang = ((fcndata_t*)p)->avg_angular;
+	Mat rodrigues;
+	//cout << "ga" << endl;
+	Mat K = Mat::zeros(cv::Size(3, 3), CV_64F);
+	K.at<double>(0, 0) = camera_matrix.at<double>(0, 0);
+	K.at<double>(0, 2) = camera_matrix.at<double>(0, 2);
+	K.at<double>(1, 1) = camera_matrix.at<double>(1, 1);
+	K.at<double>(1, 2) = camera_matrix.at<double>(1, 2);
+	K.at<double>(2, 2) = camera_matrix.at<double>(2, 2);
+	//cout << K << endl;
+	double fx = camera_matrix.at<double>(0, 0);
+	double u = camera_matrix.at<double>(0, 2);
+	double fy = camera_matrix.at<double>(1, 1);
+	double v = camera_matrix.at<double>(1, 2);
+	float sum = .0;
+
+	Mat dist_coeffs = Mat::zeros(cv::Size(5, 1), CV_64F);
+	dist_coeffs.at<double>(0, 0) = x[0];
+	dist_coeffs.at<double>(0, 1) = x[1];
+	dist_coeffs.at<double>(0, 2) = x[2];
+	dist_coeffs.at<double>(0, 3) = x[3];
+	dist_coeffs.at<double>(0, 4) = x[4];
+	//cout <<"->"<< dist_coeffs << endl;
+	//cout << dist_coeffs << endl;;
+	for (i = 0; i < frames; ++i)
+	{
+		/*cout << "set points: " << set_points_in[i] << endl;
+		cout << "dist coeffs: " << dist_coeffs << endl;*/
+		//cv::undistortPoints(set_points_in[i], set_points, K, dist_coeffs);
+		set_points = set_points_in[i];
+		//cout << "set_points" << endl;
+		for (int j = 0; j < points; ++j)
+		{
+			Rodrigues(rvecs[i].t(), rodrigues);
+			Mat Rt;
+			hconcat(rodrigues, tvecs[i], Rt);
+			Mat M = K * Rt;
+			vector<Point2f> temp_2d, out_2d;
+			Point2f point_tmp = Point2f(calibration_obj_points[i][j].x, calibration_obj_points[i][j].y);
+			temp_2d.push_back(point_tmp);
+			undistortPoints(temp_2d, out_2d, K, dist_coeffs);
+			//vector <float> aux{ calibration_obj_points[i][j].x, calibration_obj_points[i][j].y, calibration_obj_points[i][j].z, 1 };
+			vector <float> aux{ out_2d[0].x, out_2d[0].y, calibration_obj_points[i][j].z, 1 };
+			Mat calpoint(aux);
+			calpoint.convertTo(calpoint, CV_64F);
+			Mat auxpoint = calpoint;
+			Mat aux1 = M;
+			Mat mult2 = aux1 * auxpoint;
+			Mat result = Mat::zeros(cv::Size(1, 3), CV_64F);
+			result.at<double>(0, 0) = set_points[j].x - mult2.at<double>(0, 0);
+			result.at<double>(1, 0) = set_points[j].y - mult2.at<double>(1, 0);
+			result.at<double>(2, 0) = 1 - mult2.at<double>(2, 0);
+			sum = pow(norm(result, NormTypes::NORM_L2), 2) + abs(average_col[i]) + abs(average_ang[i]); /*sqrt((pow(average_col[i], 2) + pow(average_ang[i], 2)))*/;
+			//cout << "<--" << sum << endl;
+			fvec[i * points + j] += sum;
+			//cout << fvec[i * points + j] << "-->" << endl;
+		}
+	}
+	return 0;
+}
+
+
+int fcn_2(void* p, int m, int n, const real* x, real* fvec, int iflag)
+{
+	int i;
+	real tmp1, tmp2, tmp3;
+	const real* y = ((fcndata_t*)p)->y;
+	//assert(m == 15 && n == 3);
+	(void)iflag;
+	const int frames = ((fcndata_t*)p)->frames;
+	const int points = ((fcndata_t*)p)->points;
+	const vector<vector<Point3f>> calibration_obj_points = ((fcndata_t*)p)->calibration_obj_points;
+	const vector<vector<Point2f>> set_points_in = ((fcndata_t*)p)->set_points;
+	//const vector<vector<Point2f>> set_points = ((fcndata_t*)p)->set_points;
+	vector<Point2f> set_points;
+	vector<Point3f> cal_points;
+	const vector<Mat> tvecs = ((fcndata_t*)p)->tvecs;
+	const vector<Mat> rvecs = ((fcndata_t*)p)->rvecs;
+	const Mat camera_matrix = ((fcndata_t*)p)->camera_matrix;
+	const vector<float> average_col = ((fcndata_t*)p)->avg_collinear;
+	const vector<float> average_ang = ((fcndata_t*)p)->avg_angular;
+	Mat rodrigues;
+	//cout << "ga" << endl;
+	Mat K = Mat::zeros(cv::Size(3, 3), CV_64F);
+	K.at<double>(0, 0) = x[0];
+	K.at<double>(0, 2) = x[2];
+	K.at<double>(1, 1) = x[4];
+	K.at<double>(1, 2) = x[5];
+	K.at<double>(2, 2) = x[8];
+	//cout << K << endl;
+	double fx = K.at<double>(0, 0);
+	double u = K.at<double>(0, 2);
+	double fy = K.at<double>(1, 1);
+	double v = K.at<double>(1, 2);
+	float sum = .0;
+
+	Mat dist_coeffs = Mat::zeros(cv::Size(5, 1), CV_64F);
+	dist_coeffs.at<double>(0, 0) = x[9];
+	dist_coeffs.at<double>(0, 1) = x[10];
+	dist_coeffs.at<double>(0, 2) = x[11];
+	dist_coeffs.at<double>(0, 3) = x[12];
+	dist_coeffs.at<double>(0, 4) = x[13];
+	//cout <<"->"<< dist_coeffs << endl;
+	//cout << dist_coeffs << endl;;
+	for (i = 0; i < frames; ++i)
+	{
+		/*cout << "set points: " << set_points_in[i] << endl;
+		cout << "dist coeffs: " << dist_coeffs << endl;*/
+		//cv::undistortPoints(set_points_in[i], set_points, K, dist_coeffs);
+		set_points = set_points_in[i];
+		//cout << "set_points" << endl;
+		for (int j = 0; j < points; ++j)
+		{
+			Rodrigues(rvecs[i].t(), rodrigues);
+			Mat Rt;
+			hconcat(rodrigues, tvecs[i], Rt);
+			Mat M = K * Rt;
+			vector<Point2f> temp_2d, out_2d;
+			Point2f point_tmp = Point2f(calibration_obj_points[i][j].x, calibration_obj_points[i][j].y);
+			temp_2d.push_back(point_tmp);
+			undistortPoints(temp_2d, out_2d, K, dist_coeffs);
+			//vector <float> aux{ calibration_obj_points[i][j].x, calibration_obj_points[i][j].y, calibration_obj_points[i][j].z, 1 };
+			vector <float> aux{ out_2d[0].x, out_2d[0].y, calibration_obj_points[i][j].z, 1 };
+			Mat calpoint(aux);
+			calpoint.convertTo(calpoint, CV_64F);
+			Mat auxpoint = calpoint;
+			Mat aux1 = M;
+			Mat mult2 = aux1 * auxpoint;
+			Mat result = Mat::zeros(cv::Size(1, 3), CV_64F);
+			result.at<double>(0, 0) = set_points[j].x - mult2.at<double>(0, 0);
+			result.at<double>(1, 0) = set_points[j].y - mult2.at<double>(1, 0);
+			result.at<double>(2, 0) = 1 - mult2.at<double>(2, 0);
+			sum = pow(norm(result, NormTypes::NORM_L2), 2) + abs(average_col[i]) + abs(average_ang[i]); /*sqrt((pow(average_col[i], 2) + pow(average_ang[i], 2)))*/;
+			//cout << "<--" << sum << endl;
+			fvec[i * points + j] += sum;
+			//cout << fvec[i * points + j] << "-->" << endl;
+		}
 	}
 	return 0;
 }

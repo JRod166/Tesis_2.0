@@ -124,8 +124,8 @@ int main( int argc, char** argv ) {
     //VideoCapture cap("/home/pokelover/Documentos/automatic_camera_calibration/ring_calibration_videos/medio.mkv");
     //VideoCapture cap("/home/pokelover/Documentos/automatic_camera_calibration/ring_calibration_videos/lejos.mkv");
     
-    //for(int i = 0; i < videos.size(); i++)
-    int i = 0;
+    for(int i = 0; i < videos.size(); i++)
+    //int i = 0;
     {
         actualVid = videos[i];
         
@@ -152,7 +152,7 @@ int main( int argc, char** argv ) {
         //}
         
 
-        int n_frames  = 10;
+        int n_frames  = 80;
         int grid_cols = 8;
         int grid_rows = 8;
 
